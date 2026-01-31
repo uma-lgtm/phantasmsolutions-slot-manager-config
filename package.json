@@ -1,0 +1,42 @@
+{
+  "name": "@phantasm/slot-manager-config",
+  "version": "1.0.0",
+  "description": "React Native configuration service for slot-manager backend URL management",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "slot-manager",
+    "configuration",
+    "backend-url",
+    "expo"
+  ],
+  "author": "Phantasm Solutions",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phantasmsolutions/slot-manager-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phantasmsolutions/slot-manager-config/issues"
+  },
+  "homepage": "https://github.com/phantasmsolutions/slot-manager-config#readme",
+  "peerDependencies": {
+    "@react-native-async-storage/async-storage": "^1.0.0 || ^2.0.0",
+    "react-native": ">=0.60.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE",
+    "example.js"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
