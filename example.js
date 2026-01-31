@@ -1,11 +1,11 @@
 /**
- * Example usage of @phantasm/slot-manager-config
+ * Example usage of @uma-lgtm/slot-manager-config
  * 
  * This file demonstrates how to integrate the slot-manager-config
  * package into your React Native/Expo app.
  */
 
-import { createSlotManagerConfig } from '@phantasm/slot-manager-config';
+import { createSlotManagerConfig } from '@uma-lgtm/slot-manager-config';
 import { AppState } from 'react-native';
 
 // ============================================

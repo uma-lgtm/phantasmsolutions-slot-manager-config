@@ -4,6 +4,8 @@
 
 1. Create a GitHub repository: `phantasmsolutions/slot-manager-config`
 2. Get a GitHub Personal Access Token with `write:packages` permission
+   - **See `GITHUB_TOKEN_SETUP.md` for detailed instructions**
+   - Go to: Your Profile → Settings → Developer settings → Personal access tokens
 3. Set up authentication
 
 ## Setup
@@ -14,7 +16,7 @@ Create/update `.npmrc` in your home directory:
 
 ```bash
 # ~/.npmrc
-@phantasm:registry=https://npm.pkg.github.com
+@uma-lgtm:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
 ```
 
@@ -48,14 +50,14 @@ npm publish
 1. Create `.npmrc` in your project root:
 
 ```
-@phantasm:registry=https://npm.pkg.github.com
+@uma-lgtm:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
 2. Install the package:
 
 ```bash
-npm install @phantasm/slot-manager-config
+npm install @uma-lgtm/slot-manager-config
 ```
 
 ### Using GitHub URL (Alternative)
@@ -94,5 +96,6 @@ If you get authentication errors:
 
 If installation fails:
 - Make sure the repository exists and is public (or you have access)
-- Verify the package name matches: `@phantasm/slot-manager-config`
+- Verify the package name matches: `@uma-lgtm/slot-manager-config`
 - Check that you're authenticated with GitHub Packages
+

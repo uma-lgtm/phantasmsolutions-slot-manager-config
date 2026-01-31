@@ -1,4 +1,4 @@
-# @phantasm/slot-manager-config
+# @uma-lgtm/slot-manager-config
 
 A React Native configuration service for dynamically fetching and managing backend URLs from the slot-manager API.
 
@@ -12,10 +12,35 @@ A React Native configuration service for dynamically fetching and managing backe
 
 ## Installation
 
+### Prerequisites
+
+1. **Create `.npmrc` in your project root**:
+
+```
+@uma-lgtm:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+2. **Set GitHub token**:
+
 ```bash
-npm install @phantasm/slot-manager-config
+export GITHUB_TOKEN=your_github_token_here
+```
+
+3. **Install the package**:
+
+```bash
+npm install @uma-lgtm/slot-manager-config
 # or
-yarn add @phantasm/slot-manager-config
+yarn add @uma-lgtm/slot-manager-config
+```
+
+### Alternative: Install from GitHub (No Auth Required)
+
+If GitHub Packages authentication is causing issues:
+
+```bash
+npm install github:uma-lgtm/phantasmsolutions-slot-manager-config
 ```
 
 ### Peer Dependencies
@@ -36,7 +61,7 @@ yarn add @react-native-async-storage/async-storage
 
 ```javascript
 // service/configService.js
-import { createSlotManagerConfig } from '@phantasm/slot-manager-config';
+import { createSlotManagerConfig } from '@uma-lgtm/slot-manager-config';
 
 // Create instance with your app domain
 const configService = createSlotManagerConfig({
@@ -118,7 +143,7 @@ export const httpService = createApi({
 ### Advanced Options
 
 ```javascript
-import { createSlotManagerConfig } from '@phantasm/slot-manager-config';
+import { createSlotManagerConfig } from '@uma-lgtm/slot-manager-config';
 
 const configService = createSlotManagerConfig({
   domain: 'com.gohuntersalesrep',
@@ -200,7 +225,7 @@ The service handles errors gracefully:
 ```javascript
 // 1. Create config service
 // service/configService.js
-import { createSlotManagerConfig } from '@phantasm/slot-manager-config';
+import { createSlotManagerConfig } from '@uma-lgtm/slot-manager-config';
 export default createSlotManagerConfig({
   domain: 'com.gohuntersalesrep',
 });
