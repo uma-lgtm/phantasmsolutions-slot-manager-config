@@ -13,7 +13,7 @@ class SlotManagerConfigService {
     } = options;
 
     if (!domain) {
-      throw new Error('Domain is required. Please provide your app domain (e.g., "com.gohuntersalesrep")');
+      throw new Error('Domain is required. Please provide your app domain (e.g., "com.yourdomain")');
     }
 
     this.domain = domain;
@@ -35,7 +35,7 @@ class SlotManagerConfigService {
         const config = JSON.parse(storedConfig);
         this.baseUrl = config.baseUrl;
         this.configLoaded = true;
-        console.log('[SlotManagerConfig] Loaded config from storage:', this.baseUrl);
+        // console.log('[SlotManagerConfig] Loaded config from storage:', this.baseUrl);
       }
 
       // Always try to fetch fresh config from server
@@ -65,7 +65,7 @@ class SlotManagerConfigService {
   async fetchConfigFromServer() {
     try {
       const configServerUrl = `${this.slotManagerUrl}/api/check-website-active?domain=${this.domain}`;
-      console.log('[SlotManagerConfig] Fetching config from:', configServerUrl);
+      // console.log('[SlotManagerConfig] Fetching config from:', configServerUrl);
       
       const response = await fetch(configServerUrl, {
         method: 'GET',
@@ -79,13 +79,13 @@ class SlotManagerConfigService {
       }
 
       const config = await response.json();
-      console.log('[SlotManagerConfig] Config response:', config);
+      // console.log('[SlotManagerConfig] Config response:', config);
      
       // Update base URL
       if (config.status && config.data?.backend_url_1) {
         this.baseUrl = config.data.backend_url_1;
         this.configLoaded = true;
-        console.log('[SlotManagerConfig] Main Base URL:', this.baseUrl);
+        // console.log('[SlotManagerConfig] Main Base URL:', this.baseUrl);
         
         // Store the config locally
         await AsyncStorage.setItem(this.storageKey, JSON.stringify({ 
