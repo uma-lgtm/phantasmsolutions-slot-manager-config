@@ -16,7 +16,6 @@ import { AppState } from 'react-native';
 const configService = createSlotManagerConfig({
   domain: 'com.gohuntersalesrep', // Change this to your app domain
   // Optional: slotManagerUrl: 'https://slot-manager.phantasm.solutions/',
-  // Optional: storageKey: 'slot_manager_config',
 });
 
 export default configService;

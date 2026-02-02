@@ -4,11 +4,10 @@ A React Native configuration service for dynamically fetching and managing backe
 
 ## Features
 
-- 🔄 **Dynamic Backend URL**: Fetches backend URL from slot-manager API based on your app domain
-- 💾 **Local Caching**: Stores configuration locally using AsyncStorage for offline access
+- 🔄 **Dynamic Backend URL**: Always fetches fresh backend URL from slot-manager API based on your app domain
 - 🔁 **Auto-refresh**: Automatically refreshes config when app comes to foreground
-- ⚡ **Lightweight**: Minimal dependencies, only requires AsyncStorage
-- 🛡️ **Error Handling**: Graceful error handling with fallback to cached config
+- ⚡ **Lightweight**: Zero dependencies, uses native fetch API
+- 🛡️ **Error Handling**: Clear error messages when config fetch fails
 
 ## Installation
 
@@ -45,13 +44,8 @@ npm install github:uma-lgtm/phantasmsolutions-slot-manager-config
 
 ### Peer Dependencies
 
-Make sure you have `@react-native-async-storage/async-storage` installed:
-
-```bash
-npm install @react-native-async-storage/async-storage
-# or
-yarn add @react-native-async-storage/async-storage
-```
+This package requires React Native (uses native fetch API):
+- `react-native` >= 0.60.0
 
 ## Usage
 
@@ -148,7 +142,6 @@ import { createSlotManagerConfig } from '@uma-lgtm/slot-manager-config';
 const configService = createSlotManagerConfig({
   domain: 'com.gohuntersalesrep',
   slotManagerUrl: 'https://slot-manager.phantasm.solutions/', // Optional
-  storageKey: 'custom_storage_key', // Optional, default: 'slot_manager_config'
 });
 ```
 
@@ -161,7 +154,6 @@ Creates a new SlotManagerConfigService instance.
 **Parameters:**
 - `options.domain` (string, required): Your app domain (e.g., "com.gohuntersalesrep")
 - `options.slotManagerUrl` (string, optional): Slot manager URL (default: "https://slot-manager.phantasm.solutions/")
-- `options.storageKey` (string, optional): AsyncStorage key for caching (default: "slot_manager_config")
 
 **Returns:** `SlotManagerConfigService` instance
 
@@ -169,11 +161,11 @@ Creates a new SlotManagerConfigService instance.
 
 #### `initialize()`
 
-Initialize the configuration service. Fetches config from slot-manager and caches it locally.
+Initialize the configuration service. Always fetches fresh config from slot-manager API.
 
 **Returns:** `Promise<void>`
 
-**Throws:** Error if config fetch fails and no cached config is available
+**Throws:** Error if config fetch fails
 
 #### `getBaseUrl()`
 
@@ -189,13 +181,15 @@ Check if configuration is loaded.
 
 #### `refreshConfig()`
 
-Force refresh configuration from slot-manager API.
+Force refresh configuration from slot-manager API. Always fetches fresh URL.
 
 **Returns:** `Promise<void>`
 
+**Throws:** Error if config fetch fails
+
 #### `clearConfig()`
 
-Clear stored configuration from AsyncStorage.
+Clear current configuration (resets to uninitialized state).
 
 **Returns:** `Promise<void>`
 
@@ -207,18 +201,18 @@ Get the configured domain.
 
 ## How It Works
 
-1. **On App Start**: The service checks AsyncStorage for cached configuration
+1. **On App Start**: The service always fetches fresh configuration from slot-manager API
 2. **Fetch Config**: Makes a request to `{slotManagerUrl}/api/check-website-active?domain={yourDomain}`
-3. **Store Locally**: Saves the backend URL to AsyncStorage for offline access
-4. **Return URL**: Provides the backend URL via `getBaseUrl()`
+3. **Return URL**: Provides the backend URL via `getBaseUrl()`
+4. **No Caching**: Every call to `initialize()` or `refreshConfig()` fetches a fresh URL from the server
 
 ## Error Handling
 
-The service handles errors gracefully:
+The service throws errors when config fetch fails:
 
-- **Network Error**: Falls back to cached config if available
-- **Invalid Response**: Keeps using cached config if available
-- **No Cache**: Throws error that should be handled by your app
+- **Network Error**: Throws error - app should handle retry logic
+- **Invalid Response**: Throws error if backend URL is not found in response
+- **No Fallback**: Always requires successful API call - no cached fallback
 
 ## Example: Complete Integration
 
