@@ -1,6 +1,6 @@
 {
   "name": "@uma-lgtm/slot-manager-config",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React Native configuration service for slot-manager backend URL management",
   "main": "index.js",
   "scripts": {
